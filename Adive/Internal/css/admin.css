@@ -1,1 +1,33 @@
+.navbar-brand i {
+    color: #46b8da;
+}
+.circle-icon {
+    display:block;
+    margin:0 auto;
+    vertical-align: central;
+}
+.circle-icon i {
+    font-size:6em;
+    text-align: center;
+    display:block;
+}
 
+.jumbotron {
+  text-align: center;
+  background-color: transparent;
+}
+.jumbotron .btn {
+  padding: 14px 24px;
+  font-size: 21px;
+}
+.btn span.glyphicon {    			
+	opacity: 0;				
+}
+.btn.active span.glyphicon {				
+	opacity: 1;				
+}
+.navbar-brand {
+    color: #333!important;
+    font-weight: bold!important;
+    font-size:20px!important;
+}
