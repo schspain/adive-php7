@@ -6,7 +6,7 @@
         </h1>
         <ol class="breadcrumb">
             <li class="active">
-                <i class="fa fa-table"></i> <a href="<?=path('atables')?>">Tables</a> / <a href="<?=basePath()?>/admin/tables/fields/<?=$tableid?>">Fields</a> / <?=$title?>
+                <i class="fa fa-table"></i> <a href="<?=path('atables')?>">Tables</a> / <?=$title?>
             </li>
         </ol>
     </div>
@@ -23,7 +23,7 @@
     <div class="col-lg-12">
         <div class="alert alert-info alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <i class="fa fa-info-circle"></i>  <strong>TIP:</strong> Fill the form to add a new field, "Field Type" is the type of entity that you want to use in your forms.
+            <i class="fa fa-info-circle"></i>  <strong>TIP:</strong> Fill the form to add a new table in your database and a cool form to your APP.
         </div>
     </div>
 </div>
@@ -31,16 +31,22 @@
 
 <form class="form-horizontal" method="post">
   <div class="form-group">
-    <label for="fieldName" class="col-sm-2 control-label">Field Name</label>
+    <label for="tableName" class="col-sm-2 control-label">Table Name</label>
     <div class="col-sm-10">
-        <input type="text" class="form-control" id="fieldName" name="fieldName" placeholder="name" onkeyup="kpField();" required autofocus>
-        <span class="help-block">Field name in database, no spaces and entities allowed.</span>
+        <div class="input-group">
+            <input type="text" class="form-control" id="tableName" name="tableName" placeholder="mynewtable" onkeyup="kpTableName();" required autofocus>
+            <input type="hidden" class="form-control" id="nameSplit" name="nameSplit">
+            <span id="nameSplitValue" class="input-group-addon">
+                _tab
+            </span>
+        </div>
+        <span class="help-block">Table name in database, Adive add a tagline of 3 letters for prevent duplicates.</span>
     </div>
   </div>
   <div class="form-group">
-    <label for="fieldComment" class="col-sm-2 control-label">Comment</label>
+    <label for="tableDescription" class="col-sm-2 control-label">Description</label>
     <div class="col-sm-10">
-        <input type="text" class="form-control" id="fieldComment" name="fieldComment" placeholder="Field comment in database" required>
+        <input type="text" class="form-control" id="tableDescription" name="tableDescription" placeholder="Table comment in database" required>
     </div>
   </div>
   <div class="form-group">
@@ -56,40 +62,16 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="winOrder" class="col-sm-2 control-label">View Order</label>
+    <label for="tableNameField" class="col-sm-2 control-label">Field name for table relations</label>
     <div class="col-sm-10">
-        <input type="text" class="form-control" id="winOrder" name="winOrder" placeholder="Appareance order" required>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="winType" class="col-sm-2 control-label">Field Type</label>
-    <div class="col-sm-10">
-        <select name="winType" id="winType" class="form-control">
-            <option value="1">Text</option>
-            <option value="2">Textarea</option>
-            <option value="3">Text Editor</option>
-            <option value="4">Select</option>
-            <option value="5">Select multiple</option>
-            <option value="6">Datepicker</option>
-            <option value="7">Datetime (Hidden)</option>
-            <option value="8">Image upload</option>
-            <option value="9">Multiple images upload</option>
-            <option value="10">Invisible Script</option>
-            <option value="14">Checkbox</option>
-        </select>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="winCode" class="col-sm-2 control-label">Field Code</label>
-    <div class="col-sm-10">
-        <textarea class="form-control" rows="3" id="winCode" name="winCode"></textarea>
-        <span class="help-block">Field for related code with "Field Type" Ex: With Select database related type the name of the table: mynewtable.</span>
+        <input type="text" class="form-control" id="tableNameField" name="tableNameField" placeholder="Name field, Ex: name" required>
+        <span class="help-block">Type the name of the field that indicates the name of resource.</span>
     </div>
   </div>
     
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-lg btn-primary">Create field</button>
+      <button type="submit" class="btn btn-lg btn-primary">Create table</button>
     </div>
   </div>
 </form>
@@ -114,9 +96,12 @@
             return str;
         };
 
-        function kpField(){
+        function kpTableName(){
             
-            $('#fieldName').val(slug($('#fieldName').val()));
+            $('#tableName').val(slug($('#tableName').val()));
+            var name = $('#tableName').val();
+            $('#nameSplit').val(name.substring(0, 3));
+            $('#nameSplitValue').html('_'+name.substring(0, 3));
             
         }
 </script>
