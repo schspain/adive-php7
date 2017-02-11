@@ -77,7 +77,7 @@ body {
   padding-bottom: 20px;
 }';
 
-$filename = 'Views/css/jumbotron.css'
+$filename = 'Views/css/jumbotron.css';
 $dirname = dirname($filename);
 if (!is_dir($dirname))
 {
