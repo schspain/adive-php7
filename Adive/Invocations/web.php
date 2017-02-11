@@ -76,7 +76,14 @@ body {
   padding-top: 50px;
   padding-bottom: 20px;
 }';
-$cssFile = fopen('Views/css/jumbotron.css', 'w');
+
+$filename = 'Views/css/jumbotron.css'
+$dirname = dirname($filename);
+if (!is_dir($dirname))
+{
+    mkdir($dirname, 0755, true);
+}
+$cssFile = fopen($filename, 'w');
 fwrite($cssFile, $cssLib1);
 fclose($cssFile);
 // Creation Status
