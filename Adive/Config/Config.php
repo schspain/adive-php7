@@ -9,10 +9,10 @@
  */
 
 $API->config(array(
-    'database.host' => 'localhost',
-    'database.name' => 'myadivedatabaseexample',
-    'database.user' => 'root',
-    'database.pass' => ''
+    'database.host' => 'your_host',
+    'database.name' => 'your_dbname',
+    'database.user' => 'your_dbuser',
+    'database.pass' => 'your_dbpassword'
 ));
 
 // Adive Framework Content Type
