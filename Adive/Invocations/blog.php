@@ -61,7 +61,7 @@ INSERT INTO `adive_fields` (`table_id_fk`, `name`, `comment`, `win_name`, `win_d
 (766, 'creation_date', 'Creation Date', 'Creation Date', 'Creation Date', 90, 7, '', '".$dateTime."', 'blog');
 
 INSERT INTO `adive_users` (`username`, `password`, `name`, `permissions`, `creationDate`, `activeDate`, `invokeType`, `lastInvoke`) VALUES
-('blog', '".md5('blog')."', 'Clean Blog', 1, '".date('Y-m-d')." 00:00:00', '0000-00-00 00:00:00', 'web', '0000-00-00 00:00:00');
+('blog', '".md5('blog')."', 'Clean Blog', 3, '".date('Y-m-d')." 00:00:00', '".date('Y-m-d')." 00:00:00', 'web', '".date('Y-m-d')." 00:00:00');
 
 INSERT INTO `posts_pos` (`id`, `title`, `subtitle`, `content`, `url`, `image`, `seo_title`, `seo_description`, `seo_h1`, `seo_h2`, `creation_date`) VALUES
 (1, 'Man must explore, and this is exploration at its greatest', 'Problems look mighty small from 150 miles up', '<p>Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman\'s earth, if free men make it, will be truly round: a globe in practice, not in theory.</p>
