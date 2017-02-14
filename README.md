@@ -1,8 +1,8 @@
 # adive-php7
 Adive Framework for PHP7 www.adive.es
 
-# Adive Framework 1.3.2
-Adive is a PHP 7 Framework based in the concepts of Symfony2, Slim, Codeigniter and Smarty.
+# Adive Framework 2.0.1
+Adive is a PHP 7 Framework to develope webs and online apps 10 times faster with a dashboard that manages MySQL databases, a fast, easy and great alternative to PhpMyAdmin.
 
 This version includes a development toolkit to generate entities, control forms and databases, Adive is an ambitious project from Schben, which aims to turn the "coding" in "design".
 
