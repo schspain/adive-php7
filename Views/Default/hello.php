@@ -9,6 +9,6 @@
 
         <h3>Twitter</h3>
         <p>
-            Visit <a href="https://github.com/ferdinandmartin/pulse-php7" target="_blank">Pulse PHP7 GitHub</a> site to get in touch, watch it, star it and fork it!.
+            Visit <a href="https://adive.es" target="_blank">Adive PHP7 Framework</a> site to get in touch, watch it, star it and fork it!.
         </p>
     </section>
