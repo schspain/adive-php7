@@ -38,7 +38,7 @@ $API->get('/hello/{var}',
         // Optional: define a menu father
         pathActive('hello');
         // replace this example code with whatever you need
-        $API->render('Hello:world', array(
+        $API->render('Default:hello', array(
             'title' => 'Hello World!',
             'example' => $var
         ));
