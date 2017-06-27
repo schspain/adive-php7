@@ -555,15 +555,19 @@ $API->post('/admin/central/add/{id}/{permalink}',
         foreach ($resFields as $key => $fie) {
             if(substr($fie['name'], -4) != '_rel') {
             if($nF==1){
-            //$linQuery.=$fie['name'].'=:'.$fie['name'];
-            $linQuery.=$fie['name'];
-            $linValues.=':'.$fie['name'];
-            $aF[$fie['name']] = $formData->post('field_'.$fie['name']);
+	    //$linQuery.=$fie['name'].'=:'.$fie['name'];
+	    $postData = $formData->post('field_'.$fie['name']);
+	    $postData = str_replace('C:\fakepath\\','',$postData);
+	    $linQuery.=$fie['name'];
+	    $linValues.=':'.$fie['name'];
+	    $aF[$fie['name']] = $postData;
             } else {
-            //$linQuery.=','.$fie['name'].'=:'.$fie['name'];
-            $linQuery.=','.$fie['name'];
-            $linValues.=',:'.$fie['name'];
-            $aF[$fie['name']] = $formData->post('field_'.$fie['name']);
+	    //$linQuery.=','.$fie['name'].'=:'.$fie['name'];
+	    $postData = $formData->post('field_'.$fie['name']);
+	    $postData = str_replace('C:\fakepath\\','',$postData);
+	    $linQuery.=','.$fie['name'];
+	    $linValues.=',:'.$fie['name'];
+	    $aF[$fie['name']] = $postData;
             }
             $nF++;
             }
@@ -648,11 +652,15 @@ $API->post('/admin/central/edit/{id}/{id_table}/{permalink}',
         foreach ($resFields as $key => $fie) {
             if(substr($fie['name'], -4) != '_rel') {
             if($nF==1){
+            $postData = $formData->post('field_'.$fie['name']);
+            $postData = str_replace('C:\fakepath\\','',$postData);
             $linQuery.=$fie['name'].'=:'.$fie['name'];
-            $aF[$fie['name']] = $formData->post('field_'.$fie['name']);
+            $aF[$fie['name']] = $postData;
             } else {
+            $postData = $formData->post('field_'.$fie['name']);
+	    $postData = str_replace('C:\fakepath\\','',$postData);
             $linQuery.=','.$fie['name'].'=:'.$fie['name'];
-            $aF[$fie['name']] = $formData->post('field_'.$fie['name']);
+            $aF[$fie['name']] = $postData;
             }
             $nF++;
             }
