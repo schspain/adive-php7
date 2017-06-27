@@ -14,3 +14,8 @@ admin:admin
 
 Default User/Client privileges access are:
 user:user
+
+# Changelog 2.0.3
+- Fixed error in upload images for C:/Fakepath.
+- Added user access management.
+- Added "Code generated" in Tables for copy/paste in Controller or HTML.
