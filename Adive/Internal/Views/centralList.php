@@ -6,7 +6,7 @@
         </h1>
         <ol class="breadcrumb">
             <li class="active">
-                <i class="fa fa-dashcube"></i> <?=$title?>
+                <i class="fa <?=$icon?>"></i> <?=$title?>
             </li>
         </ol>
     </div>
