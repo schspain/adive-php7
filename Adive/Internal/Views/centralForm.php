@@ -6,7 +6,7 @@
         </h1>
         <ol class="breadcrumb">
             <li class="active">
-                <i class="fa fa-table"></i> <a href="<?=basePath()?>/admin/central/<?=$tables[0]['id']?>/<?=permalink($tables[0]['win_name'])?>"><?=$tables[0]['win_name']?></a> / <?=$title?>
+                <i class="fa <?=$icon?>"></i> <a href="<?=basePath()?>/admin/central/<?=$tables[0]['id']?>/<?=permalink($tables[0]['win_name'])?>"><?=$tables[0]['win_name']?></a> / <?=$title?>
             </li>
         </ol>
     </div>
