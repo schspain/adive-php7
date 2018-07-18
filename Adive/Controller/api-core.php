@@ -474,6 +474,10 @@ $API->get('/admin/central/{id}/{permalink}',
             $listQuery = $db->prepare("SELECT * FROM ".$resTables[0]['name']." ORDER by id DESC");
             $listQuery->execute(array('tabid'=>$id));
             $resList = $listQuery->fetchAll(PDO::FETCH_ASSOC);
+	    
+	    $iconQuery = $db->prepare("SELECT * FROM adive_nav WHERE table_id_fk=:id ORDER by name ASC");
+            $iconQuery->execute(array('id'=>$id));
+            $resIcon = $iconQuery->fetchAll(PDO::FETCH_ASSOC);
         
             $API->render('Adive/Internal/Views:centralList', array(
                 'title' => $resTables[0]['win_name'],
@@ -484,7 +488,8 @@ $API->get('/admin/central/{id}/{permalink}',
                 'fields' => $resFields,
                 'list' => $resList,
                 'nav' => $menuNav,
-                'getid' => $id
+                'getid' => $id,
+		'icon' => $resIcon[0]['icon']
             ));
     }
 );
@@ -519,6 +524,10 @@ $API->get('/admin/central/add/{id}/{permalink}',
             $listQuery = $db->prepare("SELECT * FROM ".$resTables[0]['name']." ORDER by id DESC");
             $listQuery->execute(array('tabid'=>$id));
             $resList = $listQuery->fetchAll(PDO::FETCH_ASSOC);
+	    
+	    $iconQuery = $db->prepare("SELECT * FROM adive_nav WHERE table_id_fk=:id ORDER by name ASC");
+            $iconQuery->execute(array('id'=>$id));
+            $resIcon = $iconQuery->fetchAll(PDO::FETCH_ASSOC);
         
             $API->render('Adive/Internal/Views:centralForm', array(
                 'title' => 'Create new: '.$resTables[0]['win_name'],
@@ -529,7 +538,8 @@ $API->get('/admin/central/add/{id}/{permalink}',
                 'fields' => $resFields,
                 'list' => $resList,
                 'nav' => $menuNav,
-                'getid' => $id
+                'getid' => $id,
+		'icon' => $resIcon[0]['icon']
             ));
     }
 );
@@ -616,6 +626,10 @@ $API->get('/admin/central/edit/{id}/{id_table}/{permalink}',
             $listQuery = $db->prepare("SELECT * FROM ".$resTables[0]['name']." WHERE id=:id ORDER by id DESC");
             $listQuery->execute(array('id'=>$id));
             $resList = $listQuery->fetchAll(PDO::FETCH_ASSOC);
+	    
+	    $iconQuery = $db->prepare("SELECT * FROM adive_nav WHERE table_id_fk=:id ORDER by name ASC");
+            $iconQuery->execute(array('id'=>$idTable));
+            $resIcon = $iconQuery->fetchAll(PDO::FETCH_ASSOC);
         
             $API->render('Adive/Internal/Views:centralEditForm', array(
                 'title' => 'Update '.$resList[0][$resTables[0]['table_name_field']],
@@ -626,7 +640,8 @@ $API->get('/admin/central/edit/{id}/{id_table}/{permalink}',
                 'fields' => $resFields,
                 'list' => $resList,
                 'nav' => $menuNav,
-                'getid' => $idTable
+                'getid' => $idTable,
+		'icon' => $resIcon[0]['icon']
             ));
     }
 );
