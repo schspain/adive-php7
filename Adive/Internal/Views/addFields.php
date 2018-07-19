@@ -58,7 +58,7 @@
   <div class="form-group">
     <label for="winOrder" class="col-sm-2 control-label">View Order</label>
     <div class="col-sm-10">
-        <input type="text" class="form-control" id="winOrder" name="winOrder" placeholder="Appareance order" required>
+        <input type="text" class="form-control" id="winOrder" name="winOrder" placeholder="Appareance order" value="<?=$numfields?>" required>
     </div>
   </div>
   <div class="form-group">
