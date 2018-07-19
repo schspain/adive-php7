@@ -40,7 +40,7 @@
   <div class="form-group">
     <label for="fieldComment" class="col-sm-2 control-label">Comment</label>
     <div class="col-sm-10">
-        <input type="text" class="form-control" id="fieldComment" name="fieldComment" placeholder="Field comment in database" required>
+        <input type="text" class="form-control" id="fieldComment" name="fieldComment" placeholder="Field comment in database" onblur="winName.value=this.value; winDescription.value=this.value;" required>
     </div>
   </div>
   <div class="form-group">
