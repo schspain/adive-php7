@@ -46,7 +46,7 @@
   <div class="form-group">
     <label for="tableDescription" class="col-sm-2 control-label">Description</label>
     <div class="col-sm-10">
-        <input type="text" class="form-control" id="tableDescription" name="tableDescription" placeholder="Table comment in database" required>
+        <input type="text" class="form-control" id="tableDescription" name="tableDescription" placeholder="Table comment in database" onblur="winName.value=this.value; winDescription.value=this.value;" required>
     </div>
   </div>
   <div class="form-group">
