@@ -277,12 +277,20 @@ $API->get('/admin/tables/fields/{table_id}',
 
 // @Route(GET) Add Field Form
 $API->get('/admin/tables/fields/add/{table_id}', 
-    function($tableID) use($API) {
+    function($tableID) use($API, $db) {
             pathActive('tables');
+	    
+	    $query = $db->prepare("SELECT COUNT(*) as num_fields FROM adive_fields WHERE table_id_fk=:tabid ORDER by win_order ASC");
+	    $query->execute(array(
+		'tabid' => $tableID
+	    ));
+	    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+	    
             $API->render('Adive/Internal/Views:addFields', array(
                 'title' => 'Create new field',
                 'description' => 'The field added will be available in database at the moment.',
-                'tableid' => $tableID
+                'tableid' => $tableID,
+		'numfields' => ($result[0]['num_fields']+1)
             ));
     }
 )->name('addFields');
