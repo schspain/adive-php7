@@ -65,7 +65,7 @@ $API->get('/admin/logout',
 // @Route(GET)
 $API->get('/admin/dashboard', 
     function() use($API, $db) {
-        if(isset($_SESSION['adive.id'])){
+        if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
             pathActive('dashboard');
             
             if($_SESSION['adive.user']!='admin'):
@@ -95,9 +95,6 @@ $API->get('/admin/dashboard',
                 'nav' => $menuNav,
                 'getid' => 999
             ));
-        } else {
-            $API->redirect($API->urlFor('alogin'));
-        }
     }
 )->name('adashboard');
 
@@ -333,6 +330,7 @@ $db= null;
 // @Route(GET)
 $API->get('/admin/invoke', 
     function() use($API, $db) {
+	    if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
             pathActive('invoke');
         
             $API->render('Adive/Internal/Views:invoke', array(
@@ -345,6 +343,7 @@ $API->get('/admin/invoke',
 // @Route(GET)
 $API->get('/admin/invoke/{type}/start', 
     function($type) use($API, $db) {
+	    if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
             pathActive('invoke');
             
             if($type=='full'){
@@ -385,6 +384,7 @@ $API->get('/admin/invoke/{type}/start',
 // @Route(POST) Invocation PROCESS
 $API->post('/admin/invoke/{type}/start', 
     function($type) use($API, $db) {
+	    if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
             pathActive('invoke');
             $invokeData=$API->request;
             $invocationFile = $invokeData->post('invokeType');
@@ -407,6 +407,7 @@ $API->post('/admin/invoke/{type}/start',
 // @Route(GET)
 $API->get('/admin/invoke/{type}/end', 
     function($type) use($API, $db) {
+	    if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
             pathActive('invoke');
             
             if($type=='full'){
@@ -448,6 +449,7 @@ $API->get('/admin/documentation',
 // @Route(GET) CENTRAL Router
 $API->get('/admin/central/{id}/{permalink}', 
     function($id, $permalink) use($API, $db) {
+	    if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
             pathActive($permalink);
             
             $navMQuery = $db->prepare("SELECT c.*, CASE WHEN isnull(is_par.id) THEN c.linkorder ELSE is_par.linkorder END as sort_order,
@@ -497,6 +499,7 @@ $API->get('/admin/central/{id}/{permalink}',
 // @Route(GET) CENTRAL Form
 $API->get('/admin/central/add/{id}/{permalink}', 
     function($id, $permalink) use($API, $db) {
+	    if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
             pathActive($permalink);
             
             $navMQuery = $db->prepare("SELECT c.*,
@@ -547,6 +550,7 @@ $API->get('/admin/central/add/{id}/{permalink}',
 // @Route(POST) CENTRAL Form Action
 $API->post('/admin/central/add/{id}/{permalink}', 
     function($id, $permalink) use($API, $db) {
+	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive($permalink);
         $formData=$API->request;
         
@@ -599,6 +603,7 @@ $API->post('/admin/central/add/{id}/{permalink}',
 // @Route(GET) CENTRAL Edit Form
 $API->get('/admin/central/edit/{id}/{id_table}/{permalink}', 
     function($id, $idTable, $permalink) use($API, $db) {
+	    if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
             pathActive($permalink);
             
             $navMQuery = $db->prepare("SELECT c.*,
@@ -649,6 +654,7 @@ $API->get('/admin/central/edit/{id}/{id_table}/{permalink}',
 // @Route(POST) CENTRAL Form Action
 $API->post('/admin/central/edit/{id}/{id_table}/{permalink}', 
     function($id, $idTable, $permalink) use($API, $db) {
+	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive($permalink);
         $formData=$API->request;
         
@@ -695,6 +701,7 @@ $API->post('/admin/central/edit/{id}/{id_table}/{permalink}',
 // @Route(GET) CENTRAL Form Action
 $API->get('/admin/central/delete/{id}/{id_table}/{permalink}', 
     function($id, $idTable, $permalink) use($API, $db) {
+	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive($permalink);
         
         $tablesQuery = $db->prepare("SELECT * FROM adive_tables WHERE id=:id ORDER by name ASC");
