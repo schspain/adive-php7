@@ -11,7 +11,7 @@
 // @Route(GET) Tables List
 $API->get('/admin/tables', 
     function() use($API, $db) {
-        if(isset($_SESSION['adive.id'])){
+        if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
             pathActive('tables');
             $tablesQuery = $db->prepare("SELECT p.id, p.name, p.description, p.win_name, p.creationDate,
                                         (SELECT COUNT(id) FROM adive_fields WHERE table_id_fk = p.id) FieldsIn FROM adive_tables p ORDER by p.name ASC");
@@ -23,15 +23,13 @@ $API->get('/admin/tables',
                 'description' => 'Crud of Tables in Database, deploy your ideas.',
                 'result' => $resTables
             ));
-        } else {
-            $API->redirect($API->urlFor('alogin'));
-        }
     }
 )->name('atables');
 
 // @Route(GET) Add Tables Form
 $API->get('/admin/tables/add', 
     function() use($API) {
+	    if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
             pathActive('tables');
             $API->render('Adive/Internal/Views:addTables', array(
                 'title' => 'Create new table',
@@ -43,6 +41,7 @@ $API->get('/admin/tables/add',
 // @Route(POST) Add Tables Action
 $API->post('/admin/tables/add', 
     function() use($API, $db) {
+	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('tables');
         $formData=$API->request;
 
@@ -76,6 +75,7 @@ $API->post('/admin/tables/add',
 // @Route(GET) Tables Edit Form
 $API->get('/admin/tables/edit/{table_id}', 
     function($tableID) use($API, $db) {
+	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('tables');
         $query1 = $db->prepare("SELECT * FROM adive_tables WHERE id=:tabid ORDER by id ASC");
         $query1->execute(array(
@@ -94,6 +94,7 @@ $API->get('/admin/tables/edit/{table_id}',
 // @Route(POST) Tables Edit Action
 $API->post('/admin/tables/edit/{table_id}', 
     function($tableID) use($API, $db) {
+	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('tables');
         $formData=$API->request;
 
@@ -132,6 +133,7 @@ $API->post('/admin/tables/edit/{table_id}',
 // @Route(GET) DELETE Table Action
 $API->get('/admin/tables/delete/{table_id}', 
     function($tableID) use($API, $db) {
+	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('tables');
         $query1 = $db->prepare("SELECT * FROM adive_tables WHERE id=:tabid ORDER by id ASC");
         $query1->execute(array(
@@ -159,6 +161,7 @@ $API->get('/admin/tables/delete/{table_id}',
 // @Route(GET) Relations List
 $API->get('/admin/tables/relations/add/{table_id}', 
     function($tableID) use($API, $db) {
+	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('tables');
         $query1 = $db->prepare("SELECT * FROM adive_tables WHERE id=:tabid ORDER by id ASC");
         $query1->execute(array(
@@ -185,6 +188,7 @@ $API->get('/admin/tables/relations/add/{table_id}',
 // @Route(POST) ADD Relation
 $API->post('/admin/tables/relations/add/{table_id}', 
     function($tableID) use($API, $db) {
+	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('tables');
         $formData=$API->request;
         $query1 = $db->prepare("SELECT * FROM adive_tables WHERE name=:tabname ORDER by id ASC");
@@ -245,6 +249,7 @@ $API->post('/admin/tables/relations/add/{table_id}',
 // @Route(GET) Fields in Table List
 $API->get('/admin/tables/fields/{table_id}', 
     function($tableID) use($API, $db) {
+	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('tables');
         
         $query1 = $db->prepare("SELECT * FROM adive_tables WHERE id=:tabid ORDER by id ASC");
@@ -278,6 +283,7 @@ $API->get('/admin/tables/fields/{table_id}',
 // @Route(GET) Add Field Form
 $API->get('/admin/tables/fields/add/{table_id}', 
     function($tableID) use($API, $db) {
+	    if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
             pathActive('tables');
 	    
 	    $query = $db->prepare("SELECT COUNT(*) as num_fields FROM adive_fields WHERE table_id_fk=:tabid ORDER by win_order ASC");
@@ -298,6 +304,7 @@ $API->get('/admin/tables/fields/add/{table_id}',
 // @Route(POST) Add Field Action
 $API->post('/admin/tables/fields/add/{table_id}', 
     function($tableID) use($API, $db) {
+	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('tables');
         $formData=$API->request;
 
@@ -356,6 +363,7 @@ $API->post('/admin/tables/fields/add/{table_id}',
 // @Route(GET) Edit Field Form
 $API->get('/admin/tables/{table_id}/fields/edit/{field_id}', 
     function($tableID, $fieldID) use($API, $db) {
+	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('tables');
         $query1 = $db->prepare("SELECT * FROM adive_tables WHERE id=:tabid ORDER by id ASC");
         $query1->execute(array(
@@ -381,6 +389,7 @@ $API->get('/admin/tables/{table_id}/fields/edit/{field_id}',
 // @Route(POST) Edit Field Action
 $API->post('/admin/tables/{table_id}/fields/edit/{field_id}', 
     function($tableID, $fieldID) use($API, $db) {
+	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('tables');
         $formData=$API->request;
         $queryInsert=$db->prepare("UPDATE adive_fields SET name=:name,comment=:comment,win_name=:win_name,win_description=:win_description,win_type=:win_type,win_order=:win_order,win_code=:win_code WHERE id=:id");
@@ -438,6 +447,7 @@ $API->post('/admin/tables/{table_id}/fields/edit/{field_id}',
 // @Route(GET) DELETE field
 $API->get('/admin/tables/{table_id}/fields/delete/{field_id}', 
     function($tableID, $fieldID) use($API, $db) {
+	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('tables');
         
         $query1 = $db->prepare("SELECT * FROM adive_tables WHERE id=:tabid ORDER by id ASC");
@@ -485,6 +495,7 @@ $API->get('/admin/tables/{table_id}/fields/delete/{field_id}',
 // @Route(GET) ADD TRIGGER FORM
 $API->get('/admin/tables/trigger/add/{table_id}', 
     function($tableID) use($API) {
+	    if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
             pathActive('tables');
             $API->render('Adive/Internal/Views:addTrigger', array(
                 'title' => 'Create new trigger',
@@ -497,6 +508,7 @@ $API->get('/admin/tables/trigger/add/{table_id}',
 // @Route(POST) ADD TRIGGER ACTION
 $API->post('/admin/tables/trigger/add/{table_id}', 
     function($tableID) use($API, $db) {
+	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('tables');
         $formData=$API->request;
         
@@ -548,6 +560,7 @@ DELIMITER ;");
 // @Route(GET) EDIT TRIGGER FORM
 $API->get('/admin/tables/{table_id}/trigger/edit/{event_id}', 
     function($tableID, $eventID) use($API, $db) {
+	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('tables');
         $query1 = $db->prepare("SELECT * FROM adive_tables WHERE id=:tabid ORDER by id ASC");
         $query1->execute(array(
@@ -573,6 +586,7 @@ $API->get('/admin/tables/{table_id}/trigger/edit/{event_id}',
 // @Route(GET) EDIT TRIGGER ACTION
 $API->post('/admin/tables/{table_id}/trigger/edit/{event_id}', 
     function($tableID, $eventID) use($API, $db) {
+	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('tables');
         $formData=$API->request;
         
@@ -625,6 +639,7 @@ DELIMITER ;");
 // @Route(GET) DELETE Trigger Action
 $API->get('/admin/tables/{table_id}/trigger/delete/{event_id}', 
     function($tableID, $eventID) use($API, $db) {
+	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('tables');
         
         $query2 = $db->prepare("SELECT * FROM adive_events WHERE id=:eveid ORDER by id ASC");
