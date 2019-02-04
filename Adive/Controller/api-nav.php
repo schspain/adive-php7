@@ -11,7 +11,7 @@
 // @Route(GET)
 $API->get('/admin/nav', 
     function() use($API, $db) {
-        if(isset($_SESSION['adive.id'])){
+        if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
             pathActive('nav');
             $tablesQuery = $db->prepare('SELECT c.*,
                                             CASE WHEN isnull(is_par.id) THEN c.linkorder ELSE is_par.linkorder END as sort_order,
@@ -28,15 +28,13 @@ $API->get('/admin/nav',
                 'description' => 'Menu options in your APP.',
                 'result' => $resNav
             ));
-        } else {
-            $API->redirect($API->urlFor('alogin'));
-        }
     }
 )->name('anav');
 
 // @Route(GET)
 $API->get('/admin/nav/add', 
     function() use($API, $db) {
+        if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
             pathActive('nav');
             
             $query2 = $db->prepare("SELECT * FROM adive_tables ORDER by id ASC");
@@ -59,6 +57,7 @@ $API->get('/admin/nav/add',
 // @Route(POST)
 $API->post('/admin/nav/add', 
     function() use($API, $db) {
+        if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         $formData=$API->request;
         $queryInsert=$db->prepare("INSERT INTO adive_nav(name,description,parent,table_id_fk,creationDate,icon)
                                 values (:name,:description,:parent,:table_id_fk,:creationDate,:icon);");
@@ -88,6 +87,7 @@ $API->post('/admin/nav/add',
 // @Route(GET)
 $API->get('/admin/nav/edit/{nav_id}', 
     function($navID) use($API, $db) {
+        if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('nav');
         $query1 = $db->prepare("SELECT * FROM adive_nav WHERE id=:navid ORDER by id ASC");
         $query1->execute(array(
@@ -116,6 +116,7 @@ $API->get('/admin/nav/edit/{nav_id}',
 // @Route(POST)
 $API->post('/admin/nav/edit/{nav_id}', 
     function($navID) use($API, $db) {
+        if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('nav');
         $formData=$API->request;
         // RE-ORDERING NAV
@@ -176,6 +177,7 @@ $API->post('/admin/nav/edit/{nav_id}',
 // @Route(GET) DELETE table
 $API->get('/admin/nav/delete/{nav_id}', 
     function($navID) use($API, $db) {
+        if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('nav');
         
         $query2 = $db->prepare("DELETE FROM adive_nav WHERE id=:navid");
@@ -193,6 +195,7 @@ $API->get('/admin/nav/delete/{nav_id}',
 // @Route(GET) UPDATE order UP
 $API->get('/admin/nav/up/{nav_id}', 
     function($navID) use($API, $db) {
+        if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('nav');
         $query1 = $db->prepare("SELECT * FROM adive_nav WHERE id=:navid ORDER by id ASC");
         $query1->execute(array(
@@ -231,6 +234,7 @@ $API->get('/admin/nav/up/{nav_id}',
 // @Route(GET) UPDATE order DOWN
 $API->get('/admin/nav/down/{nav_id}', 
     function($navID) use($API, $db) {
+        if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('nav');
         $query1 = $db->prepare("SELECT * FROM adive_nav WHERE id=:navid ORDER by id ASC");
         $query1->execute(array(
@@ -269,6 +273,7 @@ $API->get('/admin/nav/down/{nav_id}',
 // @Route(GET) Configuration
 $API->get('/admin/config', 
     function() use($API, $db) {
+        if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
             pathActive('config');
             
             $query = $db->prepare("SELECT * FROM adive_users WHERE id=".$_SESSION['adive.id']);
@@ -286,6 +291,7 @@ $API->get('/admin/config',
 // @Route(POST) Update Configuration
 $API->post('/admin/config', 
     function() use($API, $db) {
+        if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('config');
         $formData=$API->request;
 
