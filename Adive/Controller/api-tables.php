@@ -197,8 +197,8 @@ $API->post('/admin/tables/relations/add/{table_id}',
         ));
         $result1 = $query1->fetchAll(PDO::FETCH_ASSOC);
         
-        $queryInsert=$db->prepare("INSERT INTO adive_fields(table_id_fk,name,comment,win_name,win_description,win_order,win_type,win_code,creationDate,author)
-                                values (:fkid,:name,:comment,:win_name,:win_description,:win_order,:win_type,:win_code,:creationDate,:author);");
+        $queryInsert=$db->prepare("INSERT INTO adive_fields(table_id_fk,name,comment,win_name,win_description,win_order,win_type,win_code,creationDate,author,visible)
+                                values (:fkid,:name,:comment,:win_name,:win_description,:win_order,:win_type,:win_code,:creationDate,:author,:visible);");
 
         $queryInsert->execute(
                 array(
@@ -212,11 +212,12 @@ $API->post('/admin/tables/relations/add/{table_id}',
                     ':win_code'=> "c_".$formData->post('destTable')."_".$formData->post('originTable')."_rl",
                     ':creationDate'=> date('Y-m-d H:i:s'),
                     ':author'=> $_SESSION['adive.user'],
+		    ':visible'=> $formData->post('visible')
                     )
                 );
         
-        $queryInsertLocal=$db->prepare("INSERT INTO adive_fields(table_id_fk,name,comment,win_name,win_description,win_order,win_type,win_code,creationDate,author)
-                                values (:fkid,:name,:comment,:win_name,:win_description,:win_order,:win_type,:win_code,:creationDate,:author);");
+        $queryInsertLocal=$db->prepare("INSERT INTO adive_fields(table_id_fk,name,comment,win_name,win_description,win_order,win_type,win_code,creationDate,author,visible)
+                                values (:fkid,:name,:comment,:win_name,:win_description,:win_order,:win_type,:win_code,:creationDate,:author,:visible);");
 
         $queryInsertLocal->execute(
                 array(
@@ -230,6 +231,7 @@ $API->post('/admin/tables/relations/add/{table_id}',
                     ':win_code'=> $formData->post('destTable').':'.$formData->post('primaryKey'),
                     ':creationDate'=> date('Y-m-d H:i:s'),
                     ':author'=> $_SESSION['adive.user'],
+		    ':visible'=> $formData->post('visible')
                     )
                 );
         
@@ -308,8 +310,8 @@ $API->post('/admin/tables/fields/add/{table_id}',
         pathActive('tables');
         $formData=$API->request;
 
-        $queryInsert=$db->prepare("INSERT INTO adive_fields(table_id_fk,name,comment,win_name,win_description,win_order,win_type,win_code,creationDate,author)
-                                values (:fkid,:name,:comment,:win_name,:win_description,:win_order,:win_type,:win_code,:creationDate,:author);");
+        $queryInsert=$db->prepare("INSERT INTO adive_fields(table_id_fk,name,comment,win_name,win_description,win_order,win_type,win_code,creationDate,author,visible)
+                                values (:fkid,:name,:comment,:win_name,:win_description,:win_order,:win_type,:win_code,:creationDate,:author,:visible);");
 
         $status=$queryInsert->execute(
                 array(
@@ -323,6 +325,7 @@ $API->post('/admin/tables/fields/add/{table_id}',
                     ':win_code'=> $formData->post('winCode'),
                     ':creationDate'=> date('Y-m-d H:i:s'),
                     ':author'=> $_SESSION['adive.user'],
+		    ':visible'=> $formData->post('visible')
                     )
                 );
         
@@ -392,7 +395,7 @@ $API->post('/admin/tables/{table_id}/fields/edit/{field_id}',
 	if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
         pathActive('tables');
         $formData=$API->request;
-        $queryInsert=$db->prepare("UPDATE adive_fields SET name=:name,comment=:comment,win_name=:win_name,win_description=:win_description,win_type=:win_type,win_order=:win_order,win_code=:win_code WHERE id=:id");
+        $queryInsert=$db->prepare("UPDATE adive_fields SET name=:name,comment=:comment,win_name=:win_name,win_description=:win_description,win_type=:win_type,win_order=:win_order,win_code=:win_code,visible=:visible WHERE id=:id");
 
         $status=$queryInsert->execute(
                 array(
@@ -404,6 +407,7 @@ $API->post('/admin/tables/{table_id}/fields/edit/{field_id}',
                     ':win_type'=> $formData->post('winType'),
                     ':win_order'=> $formData->post('winOrder'),
                     ':win_code'=> $formData->post('winCode'),
+		    ':visible'=> $formData->post('visible')
                     )
                 );
         
