@@ -166,6 +166,7 @@ CREATE TABLE `adive_fields` (
   `win_order` int(11) NOT NULL,
   `win_type` int(11) NOT NULL,
   `win_code` text NOT NULL,
+  `visible` int(11) DEFAULT NULL,
   `creationDate` datetime NOT NULL,
   `author` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -469,7 +470,7 @@ $API->get('/admin/central/{id}/{permalink}',
             $tablesQuery->execute(array('id'=>$id));
             $resTables = $tablesQuery->fetchAll(PDO::FETCH_ASSOC);
             
-            $fieldsQuery = $db->prepare("SELECT * FROM adive_fields WHERE table_id_fk=:id ORDER by win_order ASC");
+            $fieldsQuery = $db->prepare("SELECT * FROM adive_fields WHERE table_id_fk=:id AND visible = 1 ORDER by win_order ASC");
             $fieldsQuery->execute(array('id'=>$id));
             $resFields = $fieldsQuery->fetchAll(PDO::FETCH_ASSOC);
             
@@ -520,7 +521,7 @@ $API->get('/admin/central/add/{id}/{permalink}',
             $tablesQuery->execute(array('id'=>$id));
             $resTables = $tablesQuery->fetchAll(PDO::FETCH_ASSOC);
             
-            $fieldsQuery = $db->prepare("SELECT * FROM adive_fields WHERE table_id_fk=:id ORDER by win_order ASC");
+            $fieldsQuery = $db->prepare("SELECT * FROM adive_fields WHERE table_id_fk=:id AND visible = 1 ORDER by win_order ASC");
             $fieldsQuery->execute(array('id'=>$id));
             $resFields = $fieldsQuery->fetchAll(PDO::FETCH_ASSOC);
             
@@ -558,7 +559,7 @@ $API->post('/admin/central/add/{id}/{permalink}',
         $tablesQuery->execute(array('id'=>$id));
         $resTables = $tablesQuery->fetchAll(PDO::FETCH_ASSOC);
         
-        $fieldsQuery = $db->prepare("SELECT * FROM adive_fields WHERE table_id_fk=:id ORDER by win_order ASC");
+        $fieldsQuery = $db->prepare("SELECT * FROM adive_fields WHERE table_id_fk=:id AND visible = 1 ORDER by win_order ASC");
         $fieldsQuery->execute(array('id'=>$id));
         $resFields = $fieldsQuery->fetchAll(PDO::FETCH_ASSOC);
         //Query String creation
@@ -624,7 +625,7 @@ $API->get('/admin/central/edit/{id}/{id_table}/{permalink}',
             $tablesQuery->execute(array('id'=>$idTable));
             $resTables = $tablesQuery->fetchAll(PDO::FETCH_ASSOC);
             
-            $fieldsQuery = $db->prepare("SELECT * FROM adive_fields WHERE table_id_fk=:id ORDER by win_order ASC");
+            $fieldsQuery = $db->prepare("SELECT * FROM adive_fields WHERE table_id_fk=:id AND visible = 1 ORDER by win_order ASC");
             $fieldsQuery->execute(array('id'=>$idTable));
             $resFields = $fieldsQuery->fetchAll(PDO::FETCH_ASSOC);
             
@@ -662,7 +663,7 @@ $API->post('/admin/central/edit/{id}/{id_table}/{permalink}',
         $tablesQuery->execute(array('id'=>$idTable));
         $resTables = $tablesQuery->fetchAll(PDO::FETCH_ASSOC);
         
-        $fieldsQuery = $db->prepare("SELECT * FROM adive_fields WHERE table_id_fk=:id ORDER by win_order ASC");
+        $fieldsQuery = $db->prepare("SELECT * FROM adive_fields WHERE table_id_fk=:id AND visible = 1 ORDER by win_order ASC");
         $fieldsQuery->execute(array('id'=>$idTable));
         $resFields = $fieldsQuery->fetchAll(PDO::FETCH_ASSOC);
         //Query String creation
@@ -708,7 +709,7 @@ $API->get('/admin/central/delete/{id}/{id_table}/{permalink}',
         $tablesQuery->execute(array('id'=>$idTable));
         $resTables = $tablesQuery->fetchAll(PDO::FETCH_ASSOC);
         
-        $fieldsQuery = $db->prepare("SELECT * FROM adive_fields WHERE table_id_fk=:id ORDER by win_order ASC");
+        $fieldsQuery = $db->prepare("SELECT * FROM adive_fields WHERE table_id_fk=:id AND visible = 1 ORDER by win_order ASC");
         $fieldsQuery->execute(array('id'=>$idTable));
         $resFields = $fieldsQuery->fetchAll(PDO::FETCH_ASSOC);
 
