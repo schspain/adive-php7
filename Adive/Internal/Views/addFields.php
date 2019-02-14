@@ -86,6 +86,15 @@
         <span class="help-block">Field for related code with "Field Type" Ex: With Select database related type the name of the table: mynewtable.</span>
     </div>
   </div>
+  <div class="form-group">
+    <label for="winType" class="col-sm-2 control-label">Visible</label>
+    <div class="col-sm-10">
+        <select name="visible" id="visible" class="form-control">
+            <option value="1">Yes (Users can view this field)</option>
+            <option value="0">No (No one can make changes in this field)</option>
+        </select>
+    </div>
+  </div>
     
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
