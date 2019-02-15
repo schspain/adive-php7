@@ -18,6 +18,7 @@ user:user
 # Changelog 2.0.5
 - Fixed security bug.
 - Added new functionality with visible/invisible fields in forms.
+- Adive.time property added for parallel workflow inclusion.
 
 # Changelog 2.0.4
 - Fixed icon design in navigation menu.
