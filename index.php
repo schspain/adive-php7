@@ -4,7 +4,7 @@ session_start();
 require 'Adive/Adive.php';
 
 /**
- * Adive Framework 2.0.1 - Copyright (c) 2012-2016 Ferdinand Martin (Schben)
+ * Adive Framework 2.0.5 - Copyright (c) 2012-2019 Ferdinand Martin (Schben)
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
