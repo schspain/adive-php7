@@ -502,7 +502,7 @@ $API->get('/admin/central/add/{id}/{permalink}',
     function($id, $permalink) use($API, $db) {
 	    if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
             pathActive($permalink);
-            
+            $_SESSION['adive.time']=time();
             $navMQuery = $db->prepare("SELECT c.*,
                                             CASE WHEN isnull(is_par.id) THEN c.linkorder ELSE is_par.linkorder END as sort_order,
                                             CASE WHEN isnull(is_par.id) THEN c.id ELSE is_par.id END as catid ,
@@ -606,7 +606,7 @@ $API->get('/admin/central/edit/{id}/{id_table}/{permalink}',
     function($id, $idTable, $permalink) use($API, $db) {
 	    if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
             pathActive($permalink);
-            
+            $_SESSION['adive.time']=time();
             $navMQuery = $db->prepare("SELECT c.*,
                                             CASE WHEN isnull(is_par.id) THEN c.linkorder ELSE is_par.linkorder END as sort_order,
                                             CASE WHEN isnull(is_par.id) THEN c.id ELSE is_par.id END as catid ,
