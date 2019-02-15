@@ -106,7 +106,7 @@
 		}
 		?>
 		<input type="hidden" class="form-control" id="field_<?=$value['name']?>" value="<?=$list[0][$value['name']]?>" name="field_<?=$value['name']?>">
-        <input id="field_file_<?=$value['name']?>" name="field_file_<?=$value['name']?>" value="<?=$list[0][$value['name']]?>" type="file" class="form-control file-loading" accept="image/*" onchange="$(#field_<?=$value['name']?>).val(this.value);">
+        <input id="field_file_<?=$value['name']?>" name="field_file_<?=$value['name']?>" value="<?=$list[0][$value['name']]?>" type="file" class="form-control file-loading" accept="image/*" onchange="var wholePIC = this.value; var splitPIC = wholePIC.split("."); $(#field_<?=$value['name']?>).val(splitPIC[1]+"_<?=$_SESSION['adive.time']?>."+splitPIC[2]);">
         <script>
         $("#field_file_<?=$value['name']?>").fileinput({
             uploadUrl: "<?=basePath()?>/Adive/Internal/upload.php",
