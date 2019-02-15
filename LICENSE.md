@@ -1,6 +1,6 @@
 # The GNU/GPL License
 
-Copyright (c) 2013-2016 Ferdinand Martin <https://github.com/ferdinandmartin>
+Copyright (c) 2013-2019 Ferdinand Martin <https://github.com/ferdinandmartin>
 
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal
