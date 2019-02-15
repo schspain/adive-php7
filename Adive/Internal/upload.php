@@ -17,7 +17,8 @@ $success = null;
 $paths= [];
 
 // get file names
-$filenames = $images['name'];
+$nameParts = explode('.',$images['name']);
+$filenames = $nameParts[0].'_'.$_SESSION['adive.time'].$nameParts[1];
 
 // loop and process files
 if(count($filenames)>1) {
