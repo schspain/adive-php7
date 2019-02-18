@@ -169,6 +169,120 @@ $API->get('/<?=$nameFormatted[0]?>',
             ));
     }
 )->name('<?=$nameFormatted[0]?>');
+
+// @Route(GET)
+$API->get('/<?=$nameFormatted[0]?>/add', 
+    function() use($API, $db) {
+            pathActive('<?=$nameFormatted[0]?>');
+            
+            // Views/Default/<?=$nameFormatted[0]?>_add.php will be needed
+            $API->render('Default:<?=$nameFormatted[0]?>_add', array(
+                'title' => '<?=$tables[0]['win_name']?>',
+                'description' => '<?=$tables[0]['win_description']?>'
+            ));
+    }
+)->name('add<?=ucfirst($nameFormatted[0])?>');
+
+// @Route(POST)
+$API->post('/<?=$nameFormatted[0]?>/add', 
+    function() use($API, $db) {
+        $formData=$API->request;
+        $queryInsert=$db->prepare("INSERT INTO <?=$tables[0]['name']?> (<?php
+        $currentRow = 1;
+        $totalRows = count($codeGenFields);
+        foreach ($codeGenFields as $value) { 
+            echo $value; 
+            if($currentRow<$totalRows) echo ', ';
+        $currentRow++;
+        }?>)
+                                values (<?php
+        $currentRow = 1;
+        $totalRows = count($codeGenFields);
+        foreach ($codeGenFields as $value) { 
+            echo ':'.$value; 
+            if($currentRow<$totalRows) echo ', ';
+        $currentRow++;
+        }?>);");
+        
+        $status=$queryInsert->execute(
+                array(
+                    <?php
+                    $currentRow = 1;
+                    $totalRows = count($codeGenFields);
+                    foreach ($codeGenFields as $value) { 
+                    echo '\':'.$value.'\'=> $formData->post(\'field'.ucfirst($value).'\')'; 
+                    if($currentRow<$totalRows) echo ',
+                    ';
+                    $currentRow++;
+                    }?>
+                    
+                    )
+                );
+        
+        ($status)? $API->flash('message','Data created.')
+                 : $API->flash('error','Exception detected: '.$queryInsert->errorInfo()[2].'.');
+        
+        ($status)? $API->redirect($API->urlFor('<?=$nameFormatted[0]?>'))
+                 : $API->redirect($API->urlFor('add<?=ucfirst($nameFormatted[0])?>'));
+    }
+);
+
+// @Route(GET)
+$API->get('/<?=$nameFormatted[0]?>/edit/{<?=$nameFormatted[0]?>_id}', 
+    function($<?=$nameFormatted[0]?>ID) use($API, $db) {
+        pathActive('<?=$nameFormatted[0]?>');
+
+        $query1 = $db->prepare("SELECT * FROM <?=$tables[0]['name']?> WHERE id=:<?=$nameFormatted[0]?>id ORDER by id ASC");
+        $query1->execute(array(
+            '<?=$nameFormatted[0]?>id' => $<?=$nameFormatted[0]?>ID
+        ));
+        $result1 = $query1->fetchAll(PDO::FETCH_ASSOC);
+        
+        $API->render('Default:<?=$nameFormatted[0]?>_edit', array(
+            'title' => '<?=$tables[0]['win_name']?>',
+            'description' => '<?=$tables[0]['win_description']?>',
+            'data' => $result1
+        ));
+    }
+)->name('edit<?=ucfirst($nameFormatted[0])?>');
+
+// @Route(POST)
+$API->post('/<?=$nameFormatted[0]?>/edit/{<?=$nameFormatted[0]?>_id}', 
+    function($<?=$nameFormatted[0]?>ID) use($API, $db) {
+        pathActive('<?=$nameFormatted[0]?>');
+        $formData=$API->request;
+        
+        $queryUpdate=$db->prepare("UPDATE <?=$tables[0]['name']?> SET <?php
+        $currentRow = 1;
+        $totalRows = count($codeGenFields);
+        foreach ($codeGenFields as $value) { 
+            echo $value.'=:'.$value; 
+            if($currentRow<$totalRows) echo ', ';
+        $currentRow++;
+        }?> WHERE id=:id");
+
+        $status=$queryUpdate->execute(
+                array(
+                    ':id' => $<?=$nameFormatted[0]?>ID,
+                    <?php
+                    $currentRow = 1;
+                    $totalRows = count($codeGenFields);
+                    foreach ($codeGenFields as $value) { 
+                    echo '\':'.$value.'\'=> $formData->post(\'field'.ucfirst($value).'\')'; 
+                    if($currentRow<$totalRows) echo ',
+                    ';
+                    $currentRow++;
+                    }?>
+                    )
+                );
+        
+        ($status)? $API->flash('message','Data updated.')
+                 : $API->flash('error','Exception detected: '.$queryInsert->errorInfo()[2].'.');
+        
+        ($status)? $API->redirect($API->urlFor('<?=$nameFormatted[0]?>'))
+                 : $API->redirect(basePath().'/<?=$nameFormatted[0]?>/edit/'.$<?=$nameFormatted[0]?>ID);
+    }
+);
 </pre>
 </fieldset>
 <fieldset>
