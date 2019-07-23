@@ -89,7 +89,8 @@ foreach ($field as $key => $value) {
             <option value="8"<?php if($value['win_type']==8) echo ' selected'; ?>>Image upload</option>
             <option value="9"<?php if($value['win_type']==9) echo ' selected'; ?>>Multiple images upload</option>
             <option value="10"<?php if($value['win_type']==10) echo ' selected'; ?>>Invisible Script</option>
-            <option value="14"<?php if($value['win_type']==14) echo ' selected'; ?>>Checkbox</option><?php
+            <option value="14"<?php if($value['win_type']==14) echo ' selected'; ?>>Checkbox</option>
+            <option value="15"<?php if($value['win_type']==15) echo ' selected'; ?>>Password</option><?php
         } else { ?>
             <option value="11"<?php if($value['win_type']==11) echo ' selected'; ?>>Combo</option>
             <!--<option value="12"<?php if($value['win_type']==12) echo ' selected'; ?>>Grid</option>-->
