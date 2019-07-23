@@ -76,6 +76,7 @@ foreach ($fields as $key => $value) {
 		case 11: $fieldType='Grid'; break;
 		case 11: $fieldType='Select'; break;
 		case 14: $fieldType='Checkbox'; break;
+	case 15: $fieldType='Password'; break;
     endswitch;
 ?>
         <tr>
