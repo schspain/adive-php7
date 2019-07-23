@@ -76,6 +76,7 @@
             <option value="9">Multiple images upload</option>
             <option value="10">Invisible Script</option>
             <option value="14">Checkbox</option>
+            <option value="15">Password</option>
         </select>
     </div>
   </div>
