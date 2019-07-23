@@ -47,6 +47,10 @@
         // TEXT INPUT ?>
         <input type="text" class="form-control" id="field_<?=$value['name']?>" name="field_<?=$value['name']?>" placeholder="<?=$value['win_description']?>" <?=$autofocus?>>
             <?php break;
+	    case 15: 
+        // TEXT INPUT ?>
+        <input type="password" class="form-control" id="field_<?=$value['name']?>" name="field_<?=$value['name']?>" placeholder="<?=$value['win_description']?>" <?=$autofocus?>>
+            <?php break;
             case 2: 
         // TEXTAREA ?>
         <textarea class="form-control" rows="3" id="field_<?=$value['name']?>" name="field_<?=$value['name']?>" <?=$autofocus?>></textarea>
