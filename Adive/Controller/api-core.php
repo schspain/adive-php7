@@ -294,7 +294,7 @@ $API->config(array(
     \'database.host\' => \''.$formData->post('host').'\',
     \'database.name\' => \''.$databaseName.'\',
     \'database.user\' => \''.$formData->post('user').'\',
-    \'database.pass\' => \''.$formData->post('password').',
+    \'database.pass\' => \''.$formData->post('password').'\',
     \'site.hash\' => \''.md5($databaseName.$formData->post('password').$formData->post('user')).'\'
 ));
 
