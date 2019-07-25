@@ -12,7 +12,8 @@ $API->config(array(
     'database.host' => 'your_host',
     'database.name' => 'your_dbname',
     'database.user' => 'your_dbuser',
-    'database.pass' => 'your_dbpassword'
+    'database.pass' => 'your_dbpassword',
+    'site.hash' => 'ahashwillbegenerated'
 ));
 
 // Adive Framework Content Type
