@@ -40,7 +40,7 @@ $API->post('/admin/login',
             $_SESSION['adive.user']=$resultLogin[0]['username'];
             $_SESSION['adive.name']=$resultLogin[0]['name'];
             $_SESSION['adive.permissions']=$resultLogin[0]['permissions'];
-            $_SESSION['site.hash']!=$API->config('site.hash');
+            $_SESSION['site.hash']=$API->config('site.hash');
             
             $API->redirect($API->urlFor('adashboard'));
         } else {
