@@ -131,14 +131,14 @@ $API->post('/configure',
         
         if ($errorCon==false) {
 
-        $queryDB = $db->prepare("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '".mb_strtolower($formData->post('name'),'UTF-8')."'");
+        $queryDB = $db->prepare("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '".$formData->post('name')."'");
         $queryDB->execute();
         
         if($queryDB->rowCount() == 1){
-            $databaseName=mb_strtolower($formData->post('name'),'UTF-8');         
+            $databaseName=$formData->post('name');         
         } else {
             //$databaseName='adive.'.date('Ymd').'.01';
-            $databaseName=mb_strtolower($formData->post('name'),'UTF-8');     
+            $databaseName=$formData->post('name');     
             $queryDBCreation = $db->prepare("CREATE DATABASE ".$databaseName." CHARACTER SET utf8 COLLATE utf8_general_ci;");
             $queryDBCreation->execute();
         }
