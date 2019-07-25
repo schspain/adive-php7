@@ -1,7 +1,7 @@
 # adive-php7
 Adive Framework for PHP7 www.adive.es
 
-# Adive Framework 2.0.6
+# Adive Framework 2.0.7
 Adive is a PHP 7 Framework to develope webs and online apps 10 times faster with a dashboard that manages MySQL databases, a fast, easy and great alternative to PhpMyAdmin.
 
 This version includes a developer toolkit to generate tables, fields and entities, control forms and databases, Adive is an ambitious project from Schben, which aims to turn the "coding" in "design".
@@ -14,6 +14,10 @@ admin:admin
 
 Default User/Client privileges access are:
 user:user
+
+# Changelog 2.0.7
+- Added new security requeriments.
+- Added new field type: Passwords.
 
 # Changelog 2.0.6
 - Fixed bug with image post input.
