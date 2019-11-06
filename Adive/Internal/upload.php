@@ -1,4 +1,5 @@
 <?php
+session_start();
 // upload.php
 // 'images' refers to your file input name attribute
 if (empty($_FILES[$_POST['inputname']])) {
@@ -18,7 +19,7 @@ $paths= [];
 
 // get file names
 $nameParts = explode('.',$images['name']);
-$filenames = $nameParts[0].'_'.$_SESSION['adive.time'].$nameParts[1];
+$filenames = $nameParts[0].'_'.$_SESSION['adive.time'].'.'.$nameParts[1];
 
 // loop and process files
 if(count($filenames)>1) {
