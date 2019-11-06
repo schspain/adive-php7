@@ -116,7 +116,10 @@
         }).on('fileuploaded', function(event, data) {
             $('#kv-success-box').append(data.response.link);
             $('#kv-success-modal').modal('show');
-			$('#field_<?=$value['name']?>').val($('#field_file_<?=$value['name']?>').val());
+            $('#field_<?=$value['name']?>').val($('#field_file_<?=$value['name']?>').val());
+            var wholePIC = $('#field_file_<?=$value['name']?>').val(); 
+            var splitPIC = wholePIC.split("."); 
+            $('#field_<?=$value['name']?>').val(splitPIC[0]+"_<?=$_SESSION['adive.time']?>."+splitPIC[1]);
         });
         </script>
         <?php break;
