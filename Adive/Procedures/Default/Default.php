@@ -342,3 +342,59 @@ function fkval($id,$table) {
     return $resRelation[0][$resTables[0]['table_name_field']];
     //return $id;
 }
+
+/**
+* Sesion Var Value
+*
+* @category   Adive
+* @package    Adive
+* @author     Ferdinand Martin
+* @since      File available since Release 1.0.0
+*/
+function session($var) {
+
+    if(!isset($_SESSION['env.vars'])){
+        $_SESSION['env.vars'] = Array();
+    }
+
+    if(isset($_SESSION['env.vars'][$var])){
+        $returnedVar = $_SESSION['env.vars'][$var];
+    } else {
+        $_SESSION['env.vars'][$var] = null;
+        $returnedVar = null;
+    }
+    return $_SESSION['env.vars'][$var];
+}
+
+function setSession($var,$value = null) {
+    $_SESSION['env.vars'][$var] = $value;
+}
+
+function time_elapsed_string($datetime, $full = false) {
+    $now = new DateTime;
+    $ago = new DateTime($datetime);
+    $diff = $now->diff($ago);
+
+    $diff->w = floor($diff->d / 7);
+    $diff->d -= $diff->w * 7;
+
+    $string = array(
+        'y' => 'año',
+        'm' => 'mes',
+        'w' => 'semana',
+        'd' => 'dia',
+        'h' => 'hora',
+        'i' => 'minuto',
+        's' => 'segundo',
+    );
+    foreach ($string as $k => &$v) {
+        if ($diff->$k) {
+            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+        } else {
+            unset($string[$k]);
+        }
+    }
+
+    if (!$full) $string = array_slice($string, 0, 1);
+    return $string ?  'hace ' . implode(', ', $string) : 'ahora';
+}
