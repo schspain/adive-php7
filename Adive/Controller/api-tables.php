@@ -348,7 +348,7 @@ $API->post('/admin/tables/fields/add/{table_id}',
                 case 8: $fieldType='TINYTEXT'; break;
                 case 9: $fieldType='TINYTEXT'; break;
                 case 10: $fieldType='TINYTEXT'; break;
-				case 14: $fieldType='INT(1)'; break;
+		case 14: $fieldType='INT(1)'; break;
             endswitch;
             $queryTableCrt=$db->prepare("ALTER TABLE `".$result1[0]['name']."` ADD `".$formData->post('fieldName')."` ".$fieldType." NULL COMMENT '".$formData->post('fieldComment')."';");
             $queryTableCrt->execute();
@@ -430,6 +430,7 @@ $API->post('/admin/tables/{table_id}/fields/edit/{field_id}',
                 case 8: $fieldType='TINYTEXT'; break;
                 case 9: $fieldType='TINYTEXT'; break;
                 case 10: $fieldType='TINYTEXT'; break;
+		case 14: $fieldType='INT(1)'; break;
             endswitch;
             
             if($formData->post('fieldName')!=$formData->post('oldName') 
