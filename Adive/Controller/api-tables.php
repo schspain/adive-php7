@@ -212,7 +212,7 @@ $API->post('/admin/tables/relations/add/{table_id}',
                     ':win_code'=> "c_".$formData->post('destTable')."_".$formData->post('originTable')."_rl",
                     ':creationDate'=> date('Y-m-d H:i:s'),
                     ':author'=> $_SESSION['adive.user'],
-		    ':visible'=> $formData->post('visible')
+		    ':visible'=> 1
                     )
                 );
         
@@ -231,7 +231,7 @@ $API->post('/admin/tables/relations/add/{table_id}',
                     ':win_code'=> $formData->post('destTable').':'.$formData->post('primaryKey'),
                     ':creationDate'=> date('Y-m-d H:i:s'),
                     ':author'=> $_SESSION['adive.user'],
-		    ':visible'=> $formData->post('visible')
+		    ':visible'=> 1
                     )
                 );
         
