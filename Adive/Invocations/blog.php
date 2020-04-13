@@ -48,17 +48,17 @@ ALTER TABLE `posts_pos`
 INSERT INTO `adive_tables` (`id`, `name`, `description`, `win_name`, `win_description`, `table_name_field`, `creationDate`) VALUES
 (766, 'posts_pos', 'Blog Posts', 'Posts', 'Blog Posts', 'title', '".$dateTime."');
   
-INSERT INTO `adive_fields` (`table_id_fk`, `name`, `comment`, `win_name`, `win_description`, `win_order`, `win_type`, `win_code`, `creationDate`, `author`) VALUES
-(766, 'title', 'Post title', 'Post title', 'Section Name', 10, 1, '', '".$dateTime."', 'blog'),
-(766, 'subtitle', 'Post resume', 'Inlay Post', 'Section Name', 15, 1, '', '".$dateTime."', 'blog'),
-(766, 'content', 'Content', 'Content', 'Content', 20, 3, '', '".$dateTime."', 'blog'),
-(766, 'url', 'Section URL', 'Permalink', 'Post URL Permalink', 30, 1, '', '".$dateTime."', 'blog'),
-(766, 'image', 'Featured image', 'Image', 'Featured image', 40, 1, '', '".$dateTime."', 'blog'),
-(766, 'seo_title', 'Head SEO Title', 'SEO Title', 'SEO Title in Head', 50, 1, '', '".$dateTime."', 'blog'),
-(766, 'seo_description', 'Head SEO Description', 'SEO Description', 'SEO-META Description in Head', 60, 2, '', '".$dateTime."', 'blog'),
-(766, 'seo_h1', 'Body H1 Tag', 'SEO H1', 'Body H1 Tag, must be different of Title.', 70, 1, '', '".$dateTime."', 'blog'),
-(766, 'seo_h2', 'Body H2 Tag', 'SEO H2', 'Body H2 Tag, optional.', 80, 1, '', '".$dateTime."', 'blog'),
-(766, 'creation_date', 'Creation Date', 'Creation Date', 'Creation Date', 90, 7, '', '".$dateTime."', 'blog');
+INSERT INTO `adive_fields` (`table_id_fk`, `name`, `comment`, `win_name`, `win_description`, `win_order`, `win_type`, `win_code`, `creationDate`, `author`, `visible`) VALUES
+(766, 'title', 'Post title', 'Post title', 'Section Name', 10, 1, '', '".$dateTime."', 'blog', 1),
+(766, 'subtitle', 'Post resume', 'Inlay Post', 'Section Name', 15, 1, '', '".$dateTime."', 'blog', 1),
+(766, 'content', 'Content', 'Content', 'Content', 20, 3, '', '".$dateTime."', 'blog', 1),
+(766, 'url', 'Section URL', 'Permalink', 'Post URL Permalink', 30, 1, '', '".$dateTime."', 'blog', 1),
+(766, 'image', 'Featured image', 'Image', 'Featured image', 40, 1, '', '".$dateTime."', 'blog', 1),
+(766, 'seo_title', 'Head SEO Title', 'SEO Title', 'SEO Title in Head', 50, 1, '', '".$dateTime."', 'blog', 1),
+(766, 'seo_description', 'Head SEO Description', 'SEO Description', 'SEO-META Description in Head', 60, 2, '', '".$dateTime."', 'blog', 1),
+(766, 'seo_h1', 'Body H1 Tag', 'SEO H1', 'Body H1 Tag, must be different of Title.', 70, 1, '', '".$dateTime."', 'blog', 1),
+(766, 'seo_h2', 'Body H2 Tag', 'SEO H2', 'Body H2 Tag, optional.', 80, 1, '', '".$dateTime."', 'blog', 1),
+(766, 'creation_date', 'Creation Date', 'Creation Date', 'Creation Date', 90, 7, '', '".$dateTime."', 'blog', 1);
 
 INSERT INTO `adive_users` (`username`, `password`, `name`, `permissions`, `creationDate`, `activeDate`, `invokeType`, `lastInvoke`) VALUES
 ('blog', '".md5('blog')."', 'Clean Blog', 3, '".date('Y-m-d')." 00:00:00', '".date('Y-m-d')." 00:00:00', 'web', '".date('Y-m-d')." 00:00:00');
@@ -179,7 +179,7 @@ $invStatus["Creating POST page."] = $postNot;
 $aboutView = <<<'EOD'
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('https://static.pexels.com/photos/28741/pexels-photo-28741.jpg')">
+    <header class="intro-header" style="background-image: url('https://static.pexels.com/photos/103875/pexels-photo-103875.jpeg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
