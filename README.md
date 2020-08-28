@@ -15,6 +15,9 @@ admin:admin
 Default User/Client privileges access are:
 user:user
 
+# Changelog 2.0.9
+- Bugfix: Security Site-Hash implemented to prevent outsite attacks.
+
 # Changelog 2.0.8
 - Bugfix: Image replacement and timestamp inclusion in temporal name.
 
