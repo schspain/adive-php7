@@ -11,7 +11,7 @@
 // @Route(GET)
 $API->get('/admin/user', 
     function() use($API, $db) {
-        if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
+        if(!isset($_SESSION['adive.id']) OR $_SESSION['site.hash']!=$API->config('site.hash')){$API->redirect($API->urlFor('alogin'));}
             pathActive('config');
             $tablesQuery = $db->prepare('SELECT * FROM `adive_users` WHERE permissions != 1 ORDER BY username');
             $tablesQuery->execute();
@@ -28,7 +28,7 @@ $API->get('/admin/user',
 // @Route(GET)
 $API->get('/admin/user/add', 
     function() use($API, $db) {
-        if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
+        if(!isset($_SESSION['adive.id']) OR $_SESSION['site.hash']!=$API->config('site.hash')){$API->redirect($API->urlFor('alogin'));}
             pathActive('config');
             
             $query = $db->prepare("SELECT * FROM adive_users ORDER by id ASC");
@@ -46,7 +46,7 @@ $API->get('/admin/user/add',
 // @Route(POST)
 $API->post('/admin/user/add', 
     function() use($API, $db) {
-        if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
+        if(!isset($_SESSION['adive.id']) OR $_SESSION['site.hash']!=$API->config('site.hash')){$API->redirect($API->urlFor('alogin'));}
         $formData=$API->request;
 
         if($formData->post('pass')!=''){
@@ -90,7 +90,7 @@ $API->post('/admin/user/add',
 // @Route(GET)
 $API->get('/admin/user/edit/{user_id}', 
     function($userid) use($API, $db) {
-        if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
+       if(!isset($_SESSION['adive.id']) OR $_SESSION['site.hash']!=$API->config('site.hash')){$API->redirect($API->urlFor('alogin'));}
         pathActive('config');
         $query1 = $db->prepare("SELECT * FROM adive_users WHERE id=:userid ORDER by id ASC");
         $query1->execute(array(
@@ -109,7 +109,7 @@ $API->get('/admin/user/edit/{user_id}',
 // @Route(POST)
 $API->post('/admin/user/edit/{user_id}', 
     function($userid) use($API, $db) {
-        if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
+        if(!isset($_SESSION['adive.id']) OR $_SESSION['site.hash']!=$API->config('site.hash')){$API->redirect($API->urlFor('alogin'));}
 
         $formData=$API->request;
         
@@ -149,7 +149,7 @@ $API->post('/admin/user/edit/{user_id}',
 // @Route(GET) DELETE table
 $API->get('/admin/user/delete/{nav_id}', 
     function($userid) use($API, $db) {
-        if(!isset($_SESSION['adive.id'])){ $API->redirect($API->urlFor('alogin')); }
+        if(!isset($_SESSION['adive.id']) OR $_SESSION['site.hash']!=$API->config('site.hash')){$API->redirect($API->urlFor('alogin'));}
         pathActive('config');
         
         $query2 = $db->prepare("DELETE FROM adive_users WHERE id=:userid");
