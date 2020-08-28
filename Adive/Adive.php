@@ -12,7 +12,7 @@ class Adive
     /**
      * @const string
      */
-    const VERSION = '2.0.7';
+    const VERSION = '2.0.9';
 
     /**
      * @var \Adive\Security\Set
