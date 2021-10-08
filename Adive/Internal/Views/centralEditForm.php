@@ -74,7 +74,7 @@
         <select name="field_<?=$value['name']?>" id="field_<?=$value['name']?>" class="form-control selectpicker" data-live-search="true">
             <?php foreach ($selectValues as $key => $optv):
             
-                if($list[0][$value['name']]==$optv){
+                if($list[0][$value['name']]==permalink($optv)){
                     $optSelected=' selected';
                 } else {
                     $optSelected='';
