@@ -398,3 +398,84 @@ function time_elapsed_string($datetime, $full = false) {
     if (!$full) $string = array_slice($string, 0, 1);
     return $string ?  'hace ' . implode(', ', $string) : 'ahora';
 }
+
+
+function cropAlign($image, $cropWidth, $cropHeight, $horizontalAlign = 'center', $verticalAlign = 'middle') {
+    $width = imagesx($image);
+    $height = imagesy($image);
+    
+    $horizontalAlignPixels = calculatePixelsForAlign($width, $cropWidth, $horizontalAlign);
+    $verticalAlignPixels = calculatePixelsForAlign($height, $cropHeight, $verticalAlign);
+    return imageCrop($image, [
+        'x' => $horizontalAlignPixels[0],
+        'y' => $verticalAlignPixels[0],
+        'width' => $horizontalAlignPixels[1],
+        'height' => $verticalAlignPixels[1]
+    ]);
+}
+
+function calculatePixelsForAlign($imageSize, $cropSize, $align) {
+    switch ($align) {
+        case 'left':
+        case 'top':
+            return [0, min($cropSize, $imageSize)];
+        case 'right':
+        case 'bottom':
+            return [max(0, $imageSize - $cropSize), min($cropSize, $imageSize)];
+        case 'center':
+        case 'middle':
+            return [
+                max(0, floor(($imageSize / 2) - ($cropSize / 2))),
+                min($cropSize, $imageSize),
+            ];
+        default: return [0, $imageSize];
+    }
+}
+
+/**
+* Resize and crop images
+*
+* @category   Adive
+* @package    Adive
+* @author     Ferdinand Martin
+* @since      File available since Release 2.1.0
+*/
+function saveImage($imgOrigin,$imgDestiny,$width = 300,$height = 300,$halign = 'center',$valign = 'middle'){
+
+    $imgType = exif_imagetype($imgOrigin);
+
+    // Imagen redimensionada
+    list($orig_width, $orig_height) = getimagesize($imgOrigin);
+
+    $widthOrigin = $orig_width;
+    $heightOrigin = $orig_height;
+    # taller
+    if ($widthOrigin > $width) {
+        $widthOrigin = ($height / $heightOrigin) * $widthOrigin;
+        $heightOrigin = $height;
+    }
+    # wider
+    if ($heightOrigin > $height) {
+        $heightOrigin = ($width / $widthOrigin) * $heightOrigin;
+        $widthOrigin = $width;
+    }
+    $thumb = imagecreatetruecolor($widthOrigin, $heightOrigin);
+
+    if($imgType==IMAGETYPE_GIF){
+        
+        $img = imagecreatefromgif($imgOrigin);
+        // Cambiar el tamaño
+        imagecopyresized($thumb, $img, 0, 0, 0, 0, $widthOrigin, $heightOrigin, $orig_width, $orig_height);
+        imagegif(cropAlign($thumb, $width, $height, $halign, $valign),$imgDestiny);
+    } else if($imgType==IMAGETYPE_PNG){
+        $img = imagecreatefrompng($imgOrigin);
+        // Cambiar el tamaño
+        imagecopyresized($thumb, $img, 0, 0, 0, 0, $widthOrigin, $heightOrigin, $orig_width, $orig_height);
+        imagepng(cropAlign($thumb, $width, $height, $halign, $valign),$imgDestiny);
+    } else {
+        $img = imagecreatefromjpeg($imgOrigin);
+        // Cambiar el tamaño
+        imagecopyresized($thumb, $img, 0, 0, 0, 0, $widthOrigin, $heightOrigin, $orig_width, $orig_height);
+        imagejpeg(cropAlign($thumb, $width, $height, $halign, $valign),$imgDestiny,90);
+    }
+}
